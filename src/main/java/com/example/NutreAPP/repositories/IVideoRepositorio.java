@@ -2,6 +2,7 @@ package com.example.NutreAPP.repositories;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -10,7 +11,7 @@ import com.example.NutreAPP.models.Video;
 import com.example.NutreAPP.models.helpers.Categoria;
 
 @Repository 
-public interface IVideoRepositorio  extends JpaRepository {
+public interface IVideoRepositorio  extends JpaRepository <Video, UUID> {
    
     // Buscar videos por categoría
     List<Video> findByCategoria(Categoria categoria);
