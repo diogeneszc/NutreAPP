@@ -34,4 +34,7 @@ public class VisualizacionServicio {
     public List<Visualizacion> buscarTodos(){
         return this.repositorio.findAll();
     }
+
+    
 }
+
