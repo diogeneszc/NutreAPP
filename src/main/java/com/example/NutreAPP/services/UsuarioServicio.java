@@ -11,16 +11,24 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.example.NutreAPP.models.Usuario;
 import com.example.NutreAPP.repositories.IUsuarioRepositorio;
+import com.example.NutreAPP.validations.UsuarioValidacion;
 
 @Service
 public class UsuarioServicio {
     // Para programar los servicios necesito los repositorios 
-    // INYECCION DE DEPENDENCIAS
+
+    // INYECCION DE DEPENDENCIAS a tarvaes de la a nortacion @Autowired
     @Autowired
     private IUsuarioRepositorio repositorio;
 
+    private UsuarioValidacion validador;
+
     //metodo guardar
-    public Usuario guardUsuario(Usuario datos){
+    public Usuario guardarUsuario(Usuario datos){
+        this.validador.validarCorreo(datos.getCorreo());
+        this.validador.validarUsuarioNuevo(datos);
+        this.validador.validarNombre(datos.getNombre());
+        this.validador.validarContrasena(datos.getContrasena_hash());
         return this.repositorio.save(datos);
     }
     // metodo buscar por id
@@ -68,7 +76,7 @@ public class UsuarioServicio {
         Optional<Usuario>usuarioBuscado = this.repositorio.findById(id);
 
         if (!usuarioBuscado.isPresent()){
-
+                                            // El httpStatus genera la respuesta 200,300,400,500 se puede moificar segun se adapte a la respuesta esperada
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "id no encontrado");
 
         } else{
