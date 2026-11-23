@@ -20,7 +20,7 @@ public class UsuarioServicio {
     // INYECCION DE DEPENDENCIAS a tarvaes de la a nortacion @Autowired
     @Autowired
     private IUsuarioRepositorio repositorio;
-
+    @Autowired
     private UsuarioValidacion validador;
 
     //metodo guardar
