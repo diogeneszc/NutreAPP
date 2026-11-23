@@ -3,6 +3,7 @@ package com.example.NutreAPP.validations;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
+
 public class VideoValidacion {
     
     // V1. Titulo obligatorio y entre 5 y 120 caracteres.               -> 400
@@ -15,6 +16,17 @@ public class VideoValidacion {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"El " + campo +" debe tener entre 5 y 120 caracteres");
         }
     }
-   
+    // V2. La URL es obligatoria y debe empezar por "http://" o
+    //     "https://".                                                    -> 400
+    //     Pista: url.startsWith("https://")
+    public void validarUrl(String valor, String campo){
+        if (valor == null || valor.isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"El campo " + campo +" es obligatorio");
+        }
+        if (!valor.matches( "^https?://\\S+$")) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"la "+ campo + " no cumple con el formato esperado");
+        }
+    }
+    
 
 }
