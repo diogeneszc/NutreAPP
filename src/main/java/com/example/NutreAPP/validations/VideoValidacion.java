@@ -3,9 +3,11 @@ package com.example.NutreAPP.validations;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.example.NutreAPP.models.Video;
+import com.example.NutreAPP.repositories.IVideoRepositorio;
 
 public class VideoValidacion {
-    
+    IVideoRepositorio repositorio;
     // V1. Titulo obligatorio y entre 5 y 120 caracteres.               -> 400
     
     public void validarTitulo (String valor, String campo){
@@ -41,5 +43,15 @@ public class VideoValidacion {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"La descripcion no puede superar mas de 500 caracteres");
         }
     }
-    
+    // V5. No pueden existir dos videos con la misma URL.                -> 409
+    //     Al CREAR: usar existsByUrl(url)
+    //     Al MODIFICAR: usar la consulta SQL 5 de abajo (igual que
+    //     contarCorreoEnOtroUsuario en Usuario)
+    public void validarVideoNuevo(Video url){
+         String urlEntregada =url.getUrl();
+         if (this.repositorio.findByUrl(urlEntregada).isPresent()) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT,"La url ya se encuentra registrada en la BD");
+         }
+    }
+
 }
