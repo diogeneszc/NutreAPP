@@ -15,11 +15,15 @@ public class VisualizacionValidacion {
     }
     // V2. La fecha NO puede ser futura (nadie ve un video manana).      -> 400
     //     Pista: fecha.isAfter(LocalDate.now())
-    public void validarFechaActual (LocalDate fecha){
-        if (fecha.isAfter(LocalDate.now())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"La fecha de la visualizacion debe ser actual");
+      public void validarFechaActual(LocalDate fecha) {
+        if (fecha == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"La fecha de visualizacion es obligatoria");
         }
-    }
+    
+        if (fecha.isAfter(LocalDate.now())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"La fecha de la visualizacion no puede ser futura");
+        }
+      }
     // V3. El campo completado es obligatorio (true o false, no null).   -> 400
     //
     // V4. El usuario y el video deben EXISTIR en la BD.                 -> 404
