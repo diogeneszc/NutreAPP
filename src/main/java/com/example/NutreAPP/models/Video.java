@@ -19,14 +19,14 @@ import jakarta.persistence.OneToMany;
 public class Video {
     @Id 
     @GeneratedValue (strategy = GenerationType.UUID)
-    
     private UUID id;
-    @Column (name = "titulo", nullable = false, length = 100, unique = false)
 
+    @Column (name = "titulo", nullable = false, length = 120, unique = false)
     private String titulo;
-    @Column (name = "descripcion", nullable = false, length = 255, unique = false)
 
+    @Column (name = "descripcion", nullable = false, length = 500, unique = false)
     private String descripcion;
+
     @Column (name = "url", nullable = false, length = 255, unique = false)
     private String url;
 
