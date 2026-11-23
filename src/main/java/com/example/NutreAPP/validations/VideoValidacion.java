@@ -7,7 +7,7 @@ import com.example.NutreAPP.models.Video;
 import com.example.NutreAPP.repositories.IVideoRepositorio;
 
 public class VideoValidacion {
-    IVideoRepositorio repositorio;
+    private IVideoRepositorio repositorio;
     // V1. Titulo obligatorio y entre 5 y 120 caracteres.               -> 400
     
     public void validarTitulo (String valor, String campo){
