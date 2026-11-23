@@ -15,7 +15,7 @@ public class UsuarioValidacion {
     @Autowired
     private IUsuarioRepositorio repositorio;
 
-    // VALIDACIONES DE FORMATO
+    // ********VALIDACIONES DE FORMATO*******
 
     //1. Valiadar que un campo sea obligatorio
 
@@ -51,7 +51,7 @@ public class UsuarioValidacion {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"La contarseña debe tener mas de 8 caracteres ");
         }
     }
-    // VALIDACIONES DE NEGOCIO
+    // **********VALIDACIONES DE NEGOCIO******************
 
     //1. validar que el correo de un usuario que se quiere registrar no exista en la BD
 
