@@ -33,5 +33,13 @@ public class VideoValidacion {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"El campo " + campo +" es obligatorio");
         }
     }
-   
+    // V4. La descripcion es opcional, pero si viene no puede
+    //     superar 500 caracteres.                                        -> 400
+
+    public void validarDescripcion(String valor){
+        if (valor.length()>500) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"La descripcion no puede superar mas de 500 caracteres");
+        }
+    }
+    
 }
