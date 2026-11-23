@@ -3,8 +3,9 @@ package com.example.NutreAPP.validations;
 import java.time.LocalDate;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
-
+@Component
 public class VisualizacionValidacion {
 
     // V1. La fecha de visualizacion es obligatoria.                     -> 400
@@ -25,7 +26,11 @@ public class VisualizacionValidacion {
         }
       }
     // V3. El campo completado es obligatorio (true o false, no null).   -> 400
-    //
+        public void validarCompletar (Boolean estaCompletado){
+            if (estaCompletado==null) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"El campo completado es obligatorio");
+            }
+        }
     // V4. El usuario y el video deben EXISTIR en la BD.                 -> 404
     //     Pista: inyectar IUsuarioRepositorio e IVideoRepositorio y
     //     usar existsById(id)
