@@ -27,6 +27,11 @@ public class VideoValidacion {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"la "+ campo + " no cumple con el formato esperado");
         }
     }
-    
-
+    // V3. La categoria es obligatoria (no puede llegar null).           -> 400
+    public void validarCategoria(String valor, String campo){
+        if (valor == null || valor.isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"El campo " + campo +" es obligatorio");
+        }
+    }
+   
 }
