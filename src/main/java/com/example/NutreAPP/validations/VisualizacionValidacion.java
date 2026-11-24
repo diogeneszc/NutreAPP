@@ -1,12 +1,21 @@
 package com.example.NutreAPP.validations;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
+
+import com.example.NutreAPP.repositories.IUsuarioRepositorio;
+import com.example.NutreAPP.repositories.IVideoRepositorio;
 @Component
 public class VisualizacionValidacion {
+    @Autowired
+    private IUsuarioRepositorio repositorioUsuario;
+    @Autowired
+    private IVideoRepositorio repositorioVideo;
 
     // V1. La fecha de visualizacion es obligatoria.                     -> 400
     public void validarFecha (LocalDate fecha){
@@ -34,8 +43,15 @@ public class VisualizacionValidacion {
     // V4. El usuario y el video deben EXISTIR en la BD.                 -> 404
     //     Pista: inyectar IUsuarioRepositorio e IVideoRepositorio y
     //     usar existsById(id)
-    
+        public void validarUsuarioVideo (UUID usuarioId, UUID videoId){
+          
+            if (usuarioId == null || !repositorioUsuario.existsById(usuarioId)) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND,"El usuario no existe");
+            }
 
-    
+            if (videoId == null || !repositorioVideo.existsById(videoId)) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND,"El video no existe");
+            }
+}   
     
 }
