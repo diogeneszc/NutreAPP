@@ -12,8 +12,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity 
+@Table (name = "visualizacion")
 public class Visualizacion {
     @Id
     @GeneratedValue (strategy = GenerationType.UUID)
@@ -25,7 +27,7 @@ public class Visualizacion {
     
     @ManyToOne
     @JoinColumn (name = "id")
-    @JsonBackReference
+    @JsonBackReference (value = "usuario_visualizacion")
     private Usuario usuario;
     
     @ManyToOne
