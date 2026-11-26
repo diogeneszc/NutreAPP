@@ -14,6 +14,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -42,8 +43,8 @@ public class Usuario {
     @Column (name = "contrasena_hash", nullable = false, unique = false)
     private String contrasena_hash;
 
-    @OneToMany (mappedBy = "usuario")
-    @JsonManagedReference (value = "usuario-visualizacion")
+    @OneToMany(mappedBy = "usuario")
+    @JsonManagedReference(value = "usuario-visualizacion")  
     private List<Visualizacion> visualizaciones;
     
     public Usuario() {
