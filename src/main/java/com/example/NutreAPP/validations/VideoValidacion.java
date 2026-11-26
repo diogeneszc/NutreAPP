@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.NutreAPP.models.Video;
+import com.example.NutreAPP.models.helpers.Categoria;
 import com.example.NutreAPP.repositories.IVideoRepositorio;
 
 @Component
@@ -12,29 +13,29 @@ public class VideoValidacion {
     private IVideoRepositorio repositorio;
     // V1. Titulo obligatorio y entre 5 y 120 caracteres.               -> 400
     
-    public void validarTitulo (String valor, String campo){
+    public void validarTitulo (String valor){
         if (valor == null || valor.isBlank()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"El campo " + campo +" es obligatorio");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"El campo  es obligatorio");
         }
         if (valor.trim().length()<5 || valor.trim().length()>120) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"El " + campo +" debe tener entre 5 y 120 caracteres");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"El campo debe tener entre 5 y 120 caracteres");
         }
     }
     // V2. La URL es obligatoria y debe empezar por "http://" o
     //     "https://".                                                    -> 400
     //     Pista: url.startsWith("https://")
-    public void validarUrl(String valor, String campo){
+    public void validarUrl(String valor){
         if (valor == null || valor.isBlank()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"El campo " + campo +" es obligatorio");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"El campo  es obligatorio");
         }
         if (!valor.matches( "^https?://\\S+$")) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"la "+ campo + " no cumple con el formato esperado");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"la url no cumple con el formato esperado");
         }
     }
     // V3. La categoria es obligatoria (no puede llegar null).           -> 400
-    public void validarCategoria(String valor, String campo){
-        if (valor == null || valor.isBlank()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"El campo " + campo +" es obligatorio");
+    public void validarCategoria(Categoria valor){
+        if (valor == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"El campo campo  es obligatorio");
         }
     }
     // V4. La descripcion es opcional, pero si viene no puede
