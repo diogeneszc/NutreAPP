@@ -17,7 +17,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity 
-@Table 
+@Table (name = "videos")
 public class Video {
     @Id 
     @GeneratedValue (strategy = GenerationType.UUID)
