@@ -17,8 +17,8 @@ public interface IVisualizacionRepositorio extends JpaRepository <Visualizacion,
     List<Visualizacion> findByFechaVisualizacion(LocalDate fechaVisualizacion);
 
     // Buscar visualizaciones sin completar
-    List<Visualizacion> findByCompletadoFalse();
+    List<Visualizacion> findByCompletarFalse();
 
     // Buscar visualizaciones completadas
-    List<Visualizacion> findByCompletadoTrue();
+    List<Visualizacion> findByCompletarTrue();
 }
