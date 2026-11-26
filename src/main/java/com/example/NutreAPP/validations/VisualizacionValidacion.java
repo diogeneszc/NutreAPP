@@ -45,12 +45,12 @@ public class VisualizacionValidacion {
     //     usar existsById(id)
         public void validarUsuarioVideo (UUID usuarioId, UUID videoId){
           
-            if (usuarioId == null || !repositorioUsuario.existsById(usuarioId)) {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND,"El usuario no existe");
+            if (repositorioUsuario.existsById(usuarioId)) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND,"El usuario se encuentra registrado en la BD");
             }
 
-            if (videoId == null || !repositorioVideo.existsById(videoId)) {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND,"El video no existe");
+            if (repositorioVideo.existsById(videoId)) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND,"El video se encuentra registrado en la BD");
             }
 }   
     
