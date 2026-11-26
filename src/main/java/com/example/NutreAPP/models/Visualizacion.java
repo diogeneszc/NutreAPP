@@ -15,31 +15,31 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity 
-@Table (name = "visualizacion")
+@Table (name = "visualizaciones")
 public class Visualizacion {
     @Id
     @GeneratedValue (strategy = GenerationType.UUID)
     private UUID id;
     @Column (name = "fecha_visualizacion", nullable = false, unique = false)
-    private LocalDate fecha_visualizacion;
+    private LocalDate fechaVisualizacion;
     @Column (name = "completar", nullable = false, unique = false)
     private Boolean completar;
     
     @ManyToOne
-    @JoinColumn (name = "id")
-    @JsonBackReference (value = "usuario_visualizacion")
+    @JoinColumn (name = "usuario_id", nullable = false)
+    @JsonBackReference (value = "usuario-visualizacion")
     private Usuario usuario;
-    
+
     @ManyToOne
-    @JoinColumn (name = "id")
-    @JsonBackReference
+    @JoinColumn (name = "video_id", nullable = false)
+    @JsonBackReference (value = "video-visualizacion")
     private Video video;
 
     public Visualizacion() {
     }
-     public Visualizacion(UUID id, LocalDate fecha_visualizacion, Boolean completar) {
+     public Visualizacion(UUID id, LocalDate fechaVisualizacion, Boolean completar) {
         this.id = id;
-        this.fecha_visualizacion = fecha_visualizacion;
+        this.fechaVisualizacion = fechaVisualizacion;
         this.completar = completar;
      }
      public UUID getId() {
@@ -48,18 +48,25 @@ public class Visualizacion {
      public void setId(UUID id) {
          this.id = id;
      }
-     public LocalDate getFecha_visualizacion() {
-         return fecha_visualizacion;
-     }
-     public void setFecha_visualizacion(LocalDate fecha_visualizacion) {
-         this.fecha_visualizacion = fecha_visualizacion;
-     }
+     public LocalDate getFechaVisualizacion() {
+    return fechaVisualizacion;
+    }
+    public void setFechaVisualizacion(LocalDate fechaVisualizacion) {
+        this.fechaVisualizacion = fechaVisualizacion;
+    }
      public Boolean getCompletar() {
          return completar;
      }
      public void setCompletar(Boolean completar) {
          this.completar = completar;
      }
+
+     public Usuario getUsuario() { return usuario; }
+     public void setUsuario(Usuario usuario) { this.usuario = usuario; }
+
+     public Video getVideo() { return video; }
+
+     public void setVideo(Video video) { this.video = video; }
 
      
 
